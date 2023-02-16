@@ -34,6 +34,9 @@ function generateTdDelete() {
     let button = document.createElement('button');
     button.textContent = "Törlés";
     button.classList = "btn btn-warning";
+    button.addEventListener('click',() =>{
+        console.log("működik");
+    });
     td.append(button);
     return td;
 }
