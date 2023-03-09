@@ -13,12 +13,35 @@ const editpriceInput = document.querySelector('#editprice');
 
 const saveEditButton = document.querySelector('#saveEditButton');
 
-const gyumolcsok = [
-    {id: 1, name:'szilva', quantity:35, price:8},
-    {id: 2, name:'alma', quantity:45, price:8.3},
-    {id: 3, name:'körte', quantity:25, price:9.5},
-    {id: 4, name:'barack', quantity:37, price:12}
-];
+// const gyumolcsok = [
+//     {id: 1, name:'szilva', quantity:35, price:8},
+//     {id: 2, name:'alma', quantity:45, price:8.3},
+//     {id: 3, name:'körte', quantity:25, price:9.5},
+//     {id: 4, name:'barack', quantity:37, price:12}
+// ];
+
+var gyumolcsok = [];
+const host = 'http://localhost:3000/';
+//http://[::1]:3000- ezt lehet javítani, ha nem műkszik
+
+function getFruits(){
+    let endpoint = 'fruits';
+    let url = host + endpoint;
+   
+
+    fetch(url)
+    .then( response => response.json())  
+    .then(  result => {
+        console.log(result);
+        gyumolcsok = result;
+        generateTbody();
+        
+    
+    } );
+
+}
+
+getFruits();
 
 
 function generateTbody(){
@@ -43,7 +66,7 @@ function generateTbody(){
         tr.append(generateTdEdit(gyumolcs));
     });
 }
-generateTbody();
+
 
 function generateTdDelete(id) {
     let td = document.createElement('td');
