@@ -29,6 +29,24 @@
       "quantity": 22,
       "price": 3,
       "id": 5
+    },
+    {
+      "name": "Szeder",
+      "quantity": "30",
+      "price": "3",
+      "id": 6
+    },
+    {
+      "name": "pomelo",
+      "quantity": "1",
+      "price": "25",
+      "id": 7
+    },
+    {
+      "name": "pomelo",
+      "quantity": "1",
+      "price": "25",
+      "id": 8
     }
   ]
 }
