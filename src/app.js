@@ -13,8 +13,10 @@ const tbody = document.querySelector("#tbody");
 const saveButton = document.querySelector("#saveButton");
 
 const nameInput = document.querySelector("#name");
-const quantityInput = document.querySelector("#quantity");
+const lengthInput = document.querySelector("#length");
 const priceInput = document.querySelector("#price");
+const personInput = document.querySelector("#person");
+const trailerInput = document.querySelector("#trailer");
 
 const editidInput = document.querySelector('#editid');
 const editnameInput = document.querySelector('#editname');
