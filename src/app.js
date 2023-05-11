@@ -1,4 +1,14 @@
 
+//File: index.html
+//Author: Balázs Réka
+//Copyright: 2023, Balázs Réka
+//Group: Szoft 1-2-E
+//Date: 2023-05-11
+//Github: https://github.com/BalazsR2022/ships
+
+
+
+
 const tbody = document.querySelector("#tbody");
 const saveButton = document.querySelector("#saveButton");
 
@@ -8,24 +18,21 @@ const priceInput = document.querySelector("#price");
 
 const editidInput = document.querySelector('#editid');
 const editnameInput = document.querySelector('#editname');
-const editquantityInput = document.querySelector('#editquantity');
+const editlengthInput = document.querySelector('#editlength');
 const editpriceInput = document.querySelector('#editprice');
+const editpersonInput = document.querySelector('#editperson');
+const edittrailerInput = document.querySelector('#edittrailer');
 
 const saveEditButton = document.querySelector('#saveEditButton');
 
-// const gyumolcsok = [
-//     {id: 1, name:'szilva', quantity:35, price:8},
-//     {id: 2, name:'alma', quantity:45, price:8.3},
-//     {id: 3, name:'körte', quantity:25, price:9.5},
-//     {id: 4, name:'barack', quantity:37, price:12}
-// ];
 
-var gyumolcsok = [];
+
+var hajok = [];
 const host = 'http://localhost:8000/';
-//http://[::1]:3000- ezt lehet javítani, ha nem műkszik
 
-function getFruits(){
-    let endpoint = 'fruits';
+
+function getShips(){
+    let endpoint = 'ships';
     let url = host + endpoint;
    
 
@@ -33,7 +40,7 @@ function getFruits(){
     .then( response => response.json())  
     .then(  result => {
         console.log(result);
-        gyumolcsok = result;
+        hajok = result;
         generateTbody();
         
     
@@ -41,29 +48,36 @@ function getFruits(){
 
 }
 
-getFruits();
+getShips();
 
 
 function generateTbody(){
-    gyumolcsok.forEach((gyumolcs) => {
+    hajok.forEach((hajo) => {
         
 
         let tr = document.createElement('tr');
         let tdName = document.createElement('td');
-        let tdQuantity = document.createElement('td');
+        let tdLength = document.createElement('td');
         let tdPrice = document.createElement('td');
+        let tdPerson = document.createElement('td');
+        let tdTrailer = document.createElement('td');
         
 
-        tdName.textContent = gyumolcs.name;
-        tdQuantity.textContent = gyumolcs.quantity;
-        tdPrice.textContent = gyumolcs.price;
+        tdName.textContent = hajo.name;
+        tdLength.textContent = hajo.length;
+        tdPrice.textContent = hajo.price;
+        tdPerson.textContent = hajo.person;
+        tdTrailer.textContent = hajo.trailer;
 
         tbody.append(tr);
         tr.append(tdName);
-        tr.append(tdQuantity);
+        tr.append(tdLength);
         tr.append(tdPrice);
-        tr.append(generateTdDelete(gyumolcs.id));
-        tr.append(generateTdEdit(gyumolcs));
+        tr.append(tdPerson);
+        tr.append(tdTrailer);
+
+        tr.append(generateTdDelete(hajo.id));
+        tr.append(generateTdEdit(hajo));
     });
 }
 
@@ -75,28 +89,15 @@ function generateTdDelete(id) {
     button.classList = "btn btn-warning";
     button.addEventListener('click',() =>{
         console.log("id");
-        deleteFruit(id);
-        // let index = 0;
-        // let count = 0;
-        // gyumolcsok.forEach((gy)=> {
-        //     if(gy.id == id){
-        //         index =  count;
-
-        //     }
-        //     count++;
-        // });
-        // console.log(index);
-        // gyumolcsok.splice(index, 1);
-        // tbody.textContent ="";
-        // generateTbody();
-    });
+        deleteShip(id);
+       
     td.append(button);
-    return td;
+    return td});
 }
 
 
 
-function generateTdEdit(fruit) {
+function generateTdEdit(ship) {
     let td = document.createElement('td');
     let button = document.createElement('button');
     button.textContent = "Szerkesztés";
@@ -107,25 +108,27 @@ function generateTdEdit(fruit) {
 
     button.addEventListener('click',() =>{
         console.log('működik');
-        console.log(fruit.name);
+        console.log(ship.name);
 
-         editidInput.value = fruit.id;
-         editnameInput.value = fruit.name;
-         editquantityInput.value = fruit.quantity;
-         editpriceInput.value = fruit.price;
+         editidInput.value = ship.id;
+         editnameInput.value = ship.name;
+         editlengthInput.value = ship.length;
+         editpriceInput.value = ship.price;
+         editpersonInput.value = ship.person;
+         edittrailerInput.value = ship.trailer;
 
     });
     td.append(button);
     return td;
 }
 
-function createFruit(fruit) {
-    let endpoint = 'fruits';
+function createShip(ship) {
+    let endpoint = 'ships';
     let url = host + endpoint;
 
     fetch(url, {
         method: 'post',
-        body: JSON.stringify(fruit),
+        body: JSON.stringify(ship),
         headers:{
            "Content-Type": "application/json" 
         }
@@ -137,8 +140,8 @@ function createFruit(fruit) {
 }
 
 
-function deleteFruit(id){
-    let endpoint = 'fruits';
+function deleteShip(id){
+    let endpoint = 'ships';
     let url = host + endpoint + '/' + id;
     fetch(url, {
         method: 'delete'
@@ -147,7 +150,7 @@ function deleteFruit(id){
     .then(result =>{
         console.log(result);
         tbody.textContent ="";
-        getFruits();
+        getShips();
     });
 
 }
@@ -157,24 +160,33 @@ function deleteFruit(id){
 saveButton.addEventListener('click', () => {
     
     let name = (nameInput.value);
-    let quantity = (quantityInput.value);
+    let length = (lengthInput.value);
     let price = (priceInput.value);
-    let gyumolcs = {
+    let person = (personInput.value);
+    let trailer = (trailerInput.value);
+
+    let hajo = {
         name: name, 
-        quantity: quantity, 
-        price:price
+        length: length, 
+        price:price,
+        person: person, 
+        trailer:trailer
     };
 
-    createFruit(gyumolcs);
+    createShip(hajo);
     tbody.textContent = '';
-    getFruits();
+    getShips();
     clearFieldOnAddModal();
 });
 
 function clearFieldOnAddModal() {
     nameInput.value = '';
-    quantityInput.value = '';
+    lengthInput.value = '';
     priceInput.value = '';
+    personInput.value = '';
+    trailerInput.value = '';
+
+
 }
 
 saveEditButton.addEventListener('click', () => {
@@ -184,12 +196,14 @@ saveEditButton.addEventListener('click', () => {
     let quantity = editquantityInput.value;
     let price = editpriceInput.value;
 
-    gyumolcsok.forEach(  (gyumolcs) => {
+    hajok.forEach(  (hajo) => {
         
-        if (gyumolcs.id == id){
-            gyumolcs.name = name;
-            gyumolcs.quantity = quantity;
-            gyumolcs.price = price;
+        if (hajo.id == id){
+            hajo.name = name;
+            hajo.length = length;
+            hajo.price = price;
+            hajo.person = person;
+            hajo.trailer = trailer;
         }
     });
 

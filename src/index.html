@@ -1,10 +1,21 @@
+<!--
+File: index.html
+Author: Balázs Réka
+Copyright: 2023, Balázs Réka
+Group: Szoft 1-2-E
+Date: 2023-05-11
+Github: https://github.com/BalazsR2022/Ships
+-->
+
+
+
 <!DOCTYPE html>
 <html lang="hu">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sablon</title>
+    <title>Ships</title>
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="style.css">
 
@@ -12,11 +23,18 @@
 
 </head>
 <body style="background-color: rgba(0,0,255,0.4) ;">
+  <div id="title" class="container">     
+
+
+    <h1>Ships/h1>
+    <h2>Author: Balázs Réka Copyright: 2023, Balázs Réka
+         Group: Szoft 1-2-E Date: 2023-05-11</h2>
+   </div> 
 
     <div class="container">     
-        <h1>Termés</h1>
+        <h1>Hajó</h1>
 
-        <!-- Button trigger modal -->
+        
         <button type="button" class="btn btn-primary" 
         data-bs-toggle="modal" data-bs-target="#addModal">
         Hozzáadás
@@ -27,8 +45,10 @@
             <thead>
               <tr>
                 <th>Név</th>
-                <th>Mennyiség</th>
+                <th>Hosszúság</th>
                 <th>Ár</th>
+                <th>Személy</th>
+                <th>trailer</th>
               </tr>
             </thead>
             <tbody id="tbody">
@@ -40,7 +60,7 @@
 
 
 
-<!-- Add Modal -->
+
 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -61,8 +81,8 @@
 
         <div>
           <div class='mt-3'>
-            <label for="quantity" class="form-label">Mennyiség</label>
-            <input type="text" placeholder="Mennyiség"
+            <label for="quantity" class="form-label">Hosszúság</label>
+            <input type="text" placeholder="Hosszúság"
             id="quantity" class="form-control">
           </div>
         </div>
@@ -71,6 +91,20 @@
           <div class='mt-3'>
             <label for="price" class="form-label">Ár</label>
             <input type="text" placeholder="Ár"
+            id="price" class="form-control">
+          </div>
+        </div>
+        <div>
+          <div class='mt-3'>
+            <label for="price" class="form-label">Személy</label>
+            <input type="text" placeholder="Személy"
+            id="price" class="form-control">
+          </div>
+        </div>
+        <div>
+          <div class='mt-3'>
+            <label for="price" class="form-label">Trailer</label>
+            <input type="text" placeholder="Trailer"
             id="price" class="form-control">
           </div>
         </div>
@@ -89,7 +123,7 @@
 </div>
 
 
-<!-- Edit Modal -->
+
 <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
