@@ -197,6 +197,8 @@ saveEditButton.addEventListener('click', () => {
     let name = editnameInput.value;
     let quantity = editquantityInput.value;
     let price = editpriceInput.value;
+    let person = editpersonInput.value;
+    let trailer = edittrailerInput.value;
 
     hajok.forEach(  (hajo) => {
         
